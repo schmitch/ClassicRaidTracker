@@ -8,9 +8,9 @@
 --
 --    This file is part of Mizus RaidTracker.
 --
---    Mizus RaidTracker is free software: you can redistribute it and/or 
---    modify it under the terms of the GNU General Public License as 
---    published by the Free Software Foundation, either version 3 of the 
+--    Mizus RaidTracker is free software: you can redistribute it and/or
+--    modify it under the terms of the GNU General Public License as
+--    published by the Free Software Foundation, either version 3 of the
 --    License, or (at your option) any later version.
 --
 --    Mizus RaidTracker is distributed in the hope that it will be useful,
@@ -19,7 +19,7 @@
 --    GNU General Public License for more details.
 --
 --    You should have received a copy of the GNU General Public License
---    along with Mizus RaidTracker.  
+--    along with Mizus RaidTracker.
 --    If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -45,9 +45,9 @@ local lastShownNumOfBosses = nil;
 local lastSelectedBossNum = nil;
 
 -- table definitions
-local MRT_RaidLogTableColDef = { 
-    {["name"] = MRT_L.GUI["Col_Num"], ["width"] = 25, ["defaultsort"] = "dsc"}, 
-    {["name"] = MRT_L.GUI["Col_Date"], ["width"] = 75}, 
+local MRT_RaidLogTableColDef = {
+    {["name"] = MRT_L.GUI["Col_Num"], ["width"] = 25, ["defaultsort"] = "dsc"},
+    {["name"] = MRT_L.GUI["Col_Date"], ["width"] = 75},
     {["name"] = MRT_L.GUI["Col_Zone"], ["width"] = 100},
     {["name"] = MRT_L.GUI["Col_Size"], ["width"] = 25},
 };
@@ -66,14 +66,14 @@ local MRT_RaidBosskillsTableColDef = {
 local MRT_BossLootTableColDef = {
     {["name"] = "", ["width"] = 1},                            -- invisible column for storing the loot number index from the raidlog-table
     {                                                          -- coloumn for Item Icon - need to store ID
-        ["name"] = "Icon", 
+        ["name"] = "Icon",
         ["width"] = 30,
         ["DoCellUpdate"] = function(rowFrame, cellFrame, data, cols, row, realrow, column, fShow, self, ...)
             -- icon handling
-            if fShow then 
+            if fShow then
                 --MRT_Debug("self:GetCell(realrow, column) = "..self:GetCell(realrow, column));
                 local itemId = self:GetCell(realrow, column);
-                local itemTexture = GetItemIcon(itemId); 
+                local itemTexture = GetItemIcon(itemId);
                 --cellFrame:SetBackdrop( { bgFile = itemTexture } );            -- put this back in, if and when SetBackdrop can handle texture IDs
                 if not (cellFrame.cellItemTexture) then
                     cellFrame.cellItemTexture = cellFrame:CreateTexture();
@@ -87,7 +87,7 @@ local MRT_BossLootTableColDef = {
             end
             -- tooltip handling
             local itemLink = self:GetCell(realrow, 6);
-            cellFrame:SetScript("OnEnter", function() 
+            cellFrame:SetScript("OnEnter", function()
                                              MRT_GUI_ItemTT:SetOwner(cellFrame, "ANCHOR_RIGHT");
                                              MRT_GUI_ItemTT:SetHyperlink(itemLink);
                                              MRT_GUI_ItemTT:Show();
@@ -103,14 +103,14 @@ local MRT_BossLootTableColDef = {
     {["name"] = MRT_L.GUI["Col_Cost"], ["width"] = 30},
     {["name"] = "", ["width"] = 1},                            -- invisible column for itemString (needed for tooltip)
     {
-        ["name"] = MRT_L.GUI["Note"], 
+        ["name"] = MRT_L.GUI["Note"],
         ["width"] = 30,
         ["DoCellUpdate"] = function(rowFrame, cellFrame, data, cols, row, realrow, column, fShow, self, ...)
             -- icon handling
             local lootNote = self:GetCell(realrow, column);
             if fShow and lootNote then
                 cellFrame:SetBackdrop( { bgFile = "Interface\\BUTTONS\\UI-GuildButton-PublicNote-Up", insets = { left = 5, right = 5, top = 5, bottom = 5 }, } );
-                cellFrame:SetScript("OnEnter", function() 
+                cellFrame:SetScript("OnEnter", function()
                                                  MRT_GUI_ItemTT:SetOwner(cellFrame, "ANCHOR_RIGHT");
                                                  MRT_GUI_ItemTT:SetText(lootNote);
                                                  MRT_GUI_ItemTT:Show();
@@ -257,7 +257,7 @@ function MRT_GUI_ParseValues()
         end
     });
 end
- 
+
 function mrt:UI_CreateTwoRowDDM()
     -- Create DropDownFrame
     if (not MRT_GUI_TwoRowDialog_DDM) then
@@ -332,7 +332,7 @@ end
 function MRT_GUI_RaidExportComplete()
     MRT_GUI_HideDialogs();
     local raid_select = MRT_GUI_RaidLogTable:GetSelection();
-    if (raid_select == nil) then 
+    if (raid_select == nil) then
         MRT_Print(MRT_L.GUI["No raid selected"]);
         return;
     end
@@ -343,7 +343,7 @@ end
 function MRT_GUI_RaidExportNormal()
     MRT_GUI_HideDialogs();
     local raid_select = MRT_GUI_RaidLogTable:GetSelection();
-    if (raid_select == nil) then 
+    if (raid_select == nil) then
         MRT_Print(MRT_L.GUI["No raid selected"]);
         return;
     end
@@ -354,7 +354,7 @@ end
 function MRT_GUI_RaidExportHard()
     MRT_GUI_HideDialogs();
     local raid_select = MRT_GUI_RaidLogTable:GetSelection();
-    if (raid_select == nil) then 
+    if (raid_select == nil) then
         MRT_Print(MRT_L.GUI["No raid selected"]);
         return;
     end
@@ -449,7 +449,7 @@ function MRT_GUI_BossAddAccept(raidnum)
             bossTimestamp = bossTimestamp + 86400;
         end
         local raidStop = MRT_RaidLog[raidnum]["StopTime"];
-        if (MRT_RaidLog[raidnum]["StopTime"] == nil) then 
+        if (MRT_RaidLog[raidnum]["StopTime"] == nil) then
             if (bossTimestamp < raidStart or bossTimestamp > time()) then
                 MRT_Print(MRT_L.GUI["Entered time is not between start and end of raid"]);
                 return;
@@ -883,7 +883,7 @@ function MRT_GUI_PlayerDropDownList_Toggle()
 end
 
 function MRT_GUI_LootModifyAccept(raidnum, bossnum, lootnum)
-    local itemLink = MRT_GUI_FourRowDialog_EB1:GetText();
+    local itemLinkFromText = MRT_GUI_FourRowDialog_EB1:GetText();
     local looter = MRT_GUI_FourRowDialog_EB2:GetText();
     local cost = MRT_GUI_FourRowDialog_EB3:GetText();
     local lootNote = MRT_GUI_FourRowDialog_EB4:GetText();
@@ -891,7 +891,7 @@ function MRT_GUI_LootModifyAccept(raidnum, bossnum, lootnum)
     cost = tonumber(cost);
     if (lootNote == nil or lootNote == "" or lootNote == " ") then lootNote = nil; end
     -- sanity-check values here - especially the itemlink / looter is free text / cost has to be a number
-    local itemName, itemLink, itemId, itemString, itemRarity, itemColor, _, _, _, _, _, _, _, _ = MRT_GetDetailedItemInformation(itemLink);
+    local itemName, itemLink, itemId, itemString, itemRarity, itemColor, _, _, _, _, _, _, _, _ = MRT_GetDetailedItemInformation(itemLinkFromText);
     if (not itemName) then
         MRT_Print(MRT_L.GUI["No itemLink found"]);
         return;
@@ -982,11 +982,11 @@ function MRT_GUI_LootModifyAccept(raidnum, bossnum, lootnum)
     if (raid_select == nil) then return; end
     local raidnum_selected = MRT_GUI_RaidLogTable:GetCell(raid_select, 1);
     local boss_select = MRT_GUI_RaidBosskillsTable:GetSelection();
-    if (boss_select == nil) then 
+    if (boss_select == nil) then
         if (raidnum_selected == raidnum) then
             MRT_GUI_BossLootTableUpdate(nil);
         end
-        return; 
+        return;
     end
     local bossnum_selected = MRT_GUI_RaidBosskillsTable:GetCell(boss_select, 1);
     if (raidnum_selected == raidnum and bossnum_selected == bossnum) then
@@ -1040,11 +1040,11 @@ function MRT_GUI_LootDeleteAccept(raidnum, bossnum, lootnum)
     if (raid_select == nil) then return; end
     local raidnum_selected = MRT_GUI_RaidLogTable:GetCell(raid_select, 1);
     local boss_select = MRT_GUI_RaidBosskillsTable:GetSelection();
-    if (boss_select == nil) then 
+    if (boss_select == nil) then
         if (raidnum_selected == raidnum) then
             MRT_GUI_BossLootTableUpdate(nil);
         end
-        return; 
+        return;
     end
     local bossnum_selected = MRT_GUI_RaidBosskillsTable:GetCell(boss_select, 1);
     if (raidnum_selected == raidnum and bossnum_selected == bossnum) then
@@ -1224,7 +1224,7 @@ function MRT_GUI_ResumeLastRaid()
     end
     if (not MRT_IsInRaid()) then
         MRT_Print(MRT_L.GUI["Player not in raid."]);
-        return; 
+        return;
     end
     local success = MRT_ResumeLastRaid();
     if (not success) then
@@ -1459,34 +1459,34 @@ end
 -- enable shift-click-parsing of item links
 function MRT_GUI_Hook_ChatEdit_InsertLink(link)
     if MRT_GUI_OneRowDialog:IsVisible() then
-        if MRT_GUI_OneRowDialog_EB1:HasFocus() then 
-            MRT_GUI_OneRowDialog_EB1:SetText(link); 
+        if MRT_GUI_OneRowDialog_EB1:HasFocus() then
+            MRT_GUI_OneRowDialog_EB1:SetText(link);
         end
     end
     if MRT_GUI_TwoRowDialog:IsVisible() then
-        if MRT_GUI_TwoRowDialog_EB1:HasFocus() then 
+        if MRT_GUI_TwoRowDialog_EB1:HasFocus() then
             MRT_GUI_TwoRowDialog_EB1:SetText(link);
-        elseif MRT_GUI_TwoRowDialog_EB2:HasFocus() then 
+        elseif MRT_GUI_TwoRowDialog_EB2:HasFocus() then
             MRT_GUI_TwoRowDialog_EB2:SetText(link);
         end
     end
     if MRT_GUI_ThreeRowDialog:IsVisible() then
-        if MRT_GUI_ThreeRowDialog_EB1:HasFocus() then 
-            MRT_GUI_ThreeRowDialog_EB1:SetText(link); 
-        elseif MRT_GUI_ThreeRowDialog_EB2:HasFocus() then 
+        if MRT_GUI_ThreeRowDialog_EB1:HasFocus() then
+            MRT_GUI_ThreeRowDialog_EB1:SetText(link);
+        elseif MRT_GUI_ThreeRowDialog_EB2:HasFocus() then
             MRT_GUI_ThreeRowDialog_EB2:SetText(link);
-        elseif MRT_GUI_ThreeRowDialog_EB3:HasFocus() then 
+        elseif MRT_GUI_ThreeRowDialog_EB3:HasFocus() then
             MRT_GUI_ThreeRowDialog_EB3:SetText(link);
         end
     end
     if MRT_GUI_FourRowDialog:IsVisible() then
-        if MRT_GUI_FourRowDialog_EB1:HasFocus() then 
-            MRT_GUI_FourRowDialog_EB1:SetText(link); 
-        elseif MRT_GUI_FourRowDialog_EB2:HasFocus() then 
+        if MRT_GUI_FourRowDialog_EB1:HasFocus() then
+            MRT_GUI_FourRowDialog_EB1:SetText(link);
+        elseif MRT_GUI_FourRowDialog_EB2:HasFocus() then
             MRT_GUI_FourRowDialog_EB2:SetText(link);
-        elseif MRT_GUI_FourRowDialog_EB3:HasFocus() then 
+        elseif MRT_GUI_FourRowDialog_EB3:HasFocus() then
             MRT_GUI_FourRowDialog_EB3:SetText(link);
-        elseif MRT_GUI_FourRowDialog_EB4:HasFocus() then 
+        elseif MRT_GUI_FourRowDialog_EB4:HasFocus() then
             MRT_GUI_FourRowDialog_EB4:SetText(link);
         end
     end

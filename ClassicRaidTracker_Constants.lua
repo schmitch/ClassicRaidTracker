@@ -52,7 +52,7 @@ MRT_ItemValues = {
     [4] = ITEM_QUALITY3_DESC,
     [5] = ITEM_QUALITY4_DESC,
     [6] = ITEM_QUALITY5_DESC,
-    [7] = ITEM_QUALITY6_DESC, 
+    [7] = ITEM_QUALITY6_DESC,
 }
 
 
@@ -91,7 +91,7 @@ MRT_RaidZones = {
     [1008] = true,      -- Mogu'shan Vaults
     [1009] = true,      -- Heart of Fear
     [1098] = true,      -- Throne of Thunder
-	[1136] = true,		-- Siege of Orgrimmar
+    [1136] = true,		-- Siege of Orgrimmar
     -- Warlords of Draenor
     [1228] = true,      -- Highmaul
     [1205] = true,      -- Blackrock Foundry
@@ -101,7 +101,7 @@ MRT_RaidZones = {
     [1648] = true,      -- Trial of Valor
     [1530] = true,      -- The Nighthold
     [1676] = true,      -- Tomb of Sargeras
-	[1712] = true,		-- Antorus
+    [1712] = true,		-- Antorus
     -- Battle for Azeroth
     [1861] = true,      -- Uldir
     [2070] = true,      -- Battle of Dazar'alor
@@ -144,10 +144,8 @@ MRT_LegacyRaidZonesWotLK = {
     [616] = true,       -- The Eye of Eternity
     [615] = true,       -- The Obsidian Sanctum
     [624] = true,       -- Vault of Archavon
-    [533] = true,       -- Naxxramas
     [603] = true,       -- Ulduar
     [649] = true,       -- Trial of the Crusader
-    [249] = true,       -- Onyxia's Lair
     [631] = true,       -- Icecrown Citadel
     [724] = true,       -- The Ruby Sanctum
 }
@@ -168,6 +166,8 @@ MRT_LegacyRaidZonesClassic = {
     [409] = true,       -- Molten Core
     [509] = true,       -- Ruins of Ahn'Qiraj
     [531] = true,       -- Temple of Ahn'Qiraj
+    [249] = true,       -- Onyxia's Lair
+    [533] = true,       -- Naxxramas
 }
 
 MRT_PvPRaids = {
@@ -189,7 +189,7 @@ MRT_BossIDList = {
     [32428] = "Underbelly Rat",
     [32470] = "Sewer Frog",
     --]]
- 
+
 }
 
 MRT_EncounterIDList = {
@@ -207,17 +207,17 @@ MRT_EncounterIDList = {
     [669] = 12098,              -- Sulfuron Harbinger
     [671] = 12018,              -- Majordomo Executus
     [672] = 11502,              -- Ragnaros
-    
+
     -- Blackwing Lair
     [610] = 12435,              -- Razorgore the Untamed
-    [611] = 13020,              -- Vaelastrasz the Corrupt 
+    [611] = 13020,              -- Vaelastrasz the Corrupt
     [612] = 12017,              -- Broodlord Lashlayer
     [613] = 11983,              -- Firemaw
     [614] = 14601,              -- Ebonroc
     [615] = 11981,              -- Flamegor
     [616] = 14020,              -- Chromaggus
-    [617] = 11583,              -- Nefarian 
-    
+    [617] = 11583,              -- Nefarian
+
     -- Ruins of Ahn'Qiraj
     [718] = 15348,              -- Kurinnaxx
     [719] = 15341,              -- General Rajaxx
@@ -225,7 +225,7 @@ MRT_EncounterIDList = {
     [721] = 15370,              -- Buru the Gorger
     [722] = 15369,              -- Ayamiss the Hunter
     [723] = 15339,              -- Ossirian the Unscarred
-    
+
     -- Temple of Ahn'Qiraj
     [709] = 15263,              -- The Prophet Skeram
     [711] = 15516,              -- Battleguard Sartura
@@ -236,8 +236,8 @@ MRT_EncounterIDList = {
     [710] = 15544,              -- Bug Trio
     [713] = 15299,              -- Viscidus
     [716] = 15517,              -- Ouro
-    
-    
+
+
     -----------------------
     --  Burning Crusade  --
     -----------------------
@@ -253,13 +253,13 @@ MRT_EncounterIDList = {
     [660] = 21752,              -- Chess Event
     [661] = 15690,              -- Prince Malchezaar
     [662] = 17225,              -- Nightbane
-    
+
     -- Gruul's Lair
     [650] = 19044,              -- Gruul
-    
+
     -- Magtheridon's Lair
     [651] = 17257,              -- Magtheridon
-    
+
     -- Serpentshrine Cavern
     [623] = 21216,              -- Hydross the Unstable
     [624] = 21217,              -- The Lurker Below
@@ -267,20 +267,20 @@ MRT_EncounterIDList = {
     [626] = 21214,              -- Fathom-Lord Karathress
     [627] = 21213,              -- Morogrim Tidewalker
     [628] = 21212,              -- Lady Vashj
-    
+
     -- Tempest Keep
     [730] = 19514,              -- Al'ar
     [731] = 19516,              -- Void Reaver
     [732] = 18805,              -- High Astromancer Solarian
     [733] = 19622,              -- Kael'thas Sunstrider
-    
+
     -- Hyjal Summit
     [618] = 17767,              -- Rage Winterchill
     [619] = 17808,              -- Anetheron
     [620] = 17888,              -- Kaz'rogal
     [621] = 17842,              -- Azgalor
     [622] = 17968,              -- Archimonde
-    
+
     -- Black Temple
     [601] = 22887,              -- High Warlord Naj'entus
     [602] = 22898,              -- Supremus
@@ -291,7 +291,7 @@ MRT_EncounterIDList = {
     [607] = 22947,              -- Mother Shahraz
     [608] = 22949,              -- The Illidari Council
     [609] = 22917,              -- Illidan Stormrage
-    
+
     -- Sunwell Plateau
     [724] = 24850,              -- Kalecgos
     [725] = 24882,              -- Brutallus
@@ -299,8 +299,8 @@ MRT_EncounterIDList = {
     [727] = 25165,              -- Eredar Twins
     [728] = 25741,              -- M'uru
     [729] = 25315,              -- Kil'jaeden
-    
-    
+
+
 	------------------------------
     --  Wrath of the Lich King  --
     ------------------------------
@@ -313,32 +313,32 @@ MRT_EncounterIDList = {
     [1115] = 16011,             -- Loatheb
     [1113] = 16061,             -- Instructor Razuvious
     [1109] = 16060,             -- Gothik the Harvester
-    [1121] = 16063,             -- The Four Horsemen          
+    [1121] = 16063,             -- The Four Horsemen
     [1118] = 16028,             -- Patchwerk
     [1111] = 15931,             -- Grobbulus
     [1108] = 15932,             -- Gluth
     [1120] = 15928,             -- Thaddius
     [1119] = 15989,             -- Sapphiron
     [1114] = 15990,             -- Kel'Thuzad
-    
+
     -- The Obsidian Sanctum
     [1090] = 28860,             -- Sartharion
-    
+
     -- Eye of Eternity
     [1094] = 28859,             -- Malygos
-    
+
     -- Archavon's Chamber
     [1126] = 31125,             -- Archavon the Stone Watcher
     [1127] = 33993,             -- Emalon the Storm Watcher
     [1128] = 35013,             -- Koralon the Flame Watcher
     [1129] = 38433,             -- Toravon the Ice Watcher
-    
+
     -- Ulduar
     [1132] = 33113,             -- Flame Leviathan
     [1136] = 33118,             -- Ignis the Furnace Master
     [1139] = 33186,             -- Razorscale
     [1142] = 33293,             -- XT-002 Deconstructor
-    [1140] = 32857,             -- Assembly of Iron         
+    [1140] = 32857,             -- Assembly of Iron
     [1137] = 32930,             -- Kologarn
     [1131] = 33515,             -- Auriaya
 	[1133] = 32906,             -- Freya
@@ -348,17 +348,17 @@ MRT_EncounterIDList = {
     [1134] = 33271,             -- General Vezax
     [1143] = 33288,             -- Yogg-Saron
     [1130] = 32871,             -- Algalon
-        
+
     -- Onyxias Lair
     [1084] = 10184,             -- Onyxia
-    
+
     -- Trial of the Crusader
     [1088] = 34797,             -- Northrend Beasts         -- ID of Icehowl - EncounterID might be buggy
     [1087] = 34780,             -- Lord Jaraxxus
 	[1086] = 34445,             -- Faction Champions        -- EncounterID might be buggy
     [1089] = 34497,             -- The Twin Val'kyr
     [1085] = 34564,             -- Anub'arak
-    
+
     -- Icecrown Citadel
     [1101] = 36612,             -- Lord Marrowgar
     [1100] = 36855,             -- Lady Deathwhisper
@@ -372,11 +372,11 @@ MRT_EncounterIDList = {
     [1098] = 36789,             -- Dreamwalker Valithria
     [1105] = 36853,             -- Sindragosa
     [1106] = 36597,             -- The Lich King
-    
+
     -- The Ruby Sanctum
     [1150] = 39863,             -- Halion
-	
-	
+
+
     -----------------
     --  Cataclysm  --
     -----------------
@@ -384,7 +384,7 @@ MRT_EncounterIDList = {
     [1033] = 47120,             -- Argaloth
     [1250] = 52363,             -- Occu'thar
     [1332] = 55869,             -- Alizabal
-    
+
     -- Blackwing Descent
     [1024] = 41570,				-- Magmaw
     [1027] = 42180,				-- Omnotron Defense System  -- ID of Toxitron
@@ -392,18 +392,18 @@ MRT_EncounterIDList = {
     [1022] = 41442,				-- Atramedes
     [1023] = 43296,				-- Chimaeron
     [1026] = 41376,				-- Nefarian
-    
+
     -- The Bastion of Twilight
     [1030] = 44600,             -- Halfus Wyrmbreaker
     [1032] = 45992,             -- Valiona and Theralion    -- ID of Valiona
     [1028] = 43735,             -- Ascendant Council        -- ID of Elementium Monstrosity
     [1029] = 43324,             -- Cho'gall
-    [1082] = 45213,             -- Sinestra                 -- Might be 1083                    
-    
+    [1082] = 45213,             -- Sinestra                 -- Might be 1083
+
     -- Throne of the Four Winds
     [1035] = 45871,             -- Conclave of Wind
     [1034] = 46753,             -- Al'Akir
-    
+
     -- Firelands
     [1197] = 52498,             -- Beth'tilac
     [1204] = 52558,             -- Lord Rhyolith
@@ -412,7 +412,7 @@ MRT_EncounterIDList = {
     [1200] = 53494,             -- Baleroc
     [1185] = 52571,             -- Majordomo Staghelm
     [1203] = 52409,             -- Ragnaros
-    
+
     -- Dragon Soul
     [1292] = 55265,             -- Morchok
     [1294] = 55308,             -- Warlord Zonozz
@@ -420,7 +420,7 @@ MRT_EncounterIDList = {
     [1296] = 55689,             -- Hagara the Stormbinder
     [1297] = 55294,             -- Ultraxion
     [1298] = 56427,             -- Warmaster Blackhorn      -- Might not work
-    [1291] = 53879,             -- Spine of Deathwing 
+    [1291] = 53879,             -- Spine of Deathwing
     [1299] = 56173,             -- Madness of Deathwing
 
 
@@ -434,13 +434,13 @@ MRT_EncounterIDList = {
 	[1436] = 60701,             -- The Spirit Kings         -- Zian
     [1500] = 60410,             -- Elegon
     [1407] = 60399,             -- Will of the Emperor      -- qin-xi
-    
+
     -- Terrace of Endless Spring
     [1409] = 60583,             -- Protectors of the Endless -- Kaolan
-    [1505] = 62442,             -- Tsulong 
+    [1505] = 62442,             -- Tsulong
     [1506] = 62983,             -- Lei Shi
     [1431] = 60999,             -- Sha of Fear
-    
+
     -- Heart of Fear
     [1507] = 62980,             -- Imperial Vizier Zor'lok
     [1504] = 62543,             -- Blade Lord Ta'yak
@@ -479,8 +479,8 @@ MRT_EncounterIDList = {
 	[1601] = 71504,             -- Siegecrafter Blackfuse
 	[1593] = 71152,             -- Paragons of the Klaxxi	-- ID of Skeer the Bloodseeker
 	[1623] = 71865,             -- Garrosh Hellscream
-    
-    
+
+
     ---------------------------
     --  Warlords of Draenor  --
     ---------------------------
@@ -518,7 +518,7 @@ MRT_EncounterIDList = {
     [1795] = 91349,             -- Mannoroth
     [1799] = 91331,             -- Archimonde
 
-    
+
     --------------
     --  Legion  --
     --------------
@@ -530,12 +530,12 @@ MRT_EncounterIDList = {
     [1854] = 102679, 			-- Dragons of Nightmare     -- ID of Ysondre
     [1877] = 104636, 			-- Cenarius
     [1864] = 103769, 			-- Xavius
-	
+
     -- Trial of Valor
     [1958] = 114263,            -- Odyn
     [1962] = 114323,            -- Guarm
     [2008] = 114537,            -- Helya
-    
+
     -- The Nighthold
     [1849] = 102263,            -- Skorpyon
     [1865] = 104415,            -- Chronomatic Anomaly
@@ -547,7 +547,7 @@ MRT_EncounterIDList = {
     [1863] = 103758,            -- Etraeus
     [1872] = 106643,            -- Elisande
     [1866] = 105503,            -- Gul'dan
-    
+
     -- Tomb of Sageras
     [2032] = 115844,            -- Goroth
     [2048] = 116691,            -- Demonic Inquisition
@@ -558,7 +558,7 @@ MRT_EncounterIDList = {
     [2052] = 118289,            -- Maiden of Vigilance
     [2038] = 116939,            -- Fallen Avatar
     [2051] = 108573,            -- Kil'jaeden
-	
+
 	-- Antorus
 	[2076] = 122450,            -- Garothi Worldbreaker
 	[2074] = 122477,            -- Felhounds of Sargeras
@@ -571,8 +571,8 @@ MRT_EncounterIDList = {
 	[2073] = 122468,            -- The Coven of Shivarra
 	[2063] = 121975,            -- Aggramar
 	[2092] = 125111,            -- Argus the Unmaker
-    
-    
+
+
     --------------------------
     --  Battle for Azeroth  --
     --------------------------
@@ -585,7 +585,7 @@ MRT_EncounterIDList = {
     [2145] = 138967,            -- Zul, Reborn
     [2135] = 134546,            -- Mythrax the Unraveler
     [2122] = 132998,            -- G'huun
-    
+
     -- Battle of Dazar'alor
     [2265] = 144683,            -- Champion of Light (both factions)
     [2263] = 144638,            -- Grong the Revenant (Alliance)
@@ -598,11 +598,11 @@ MRT_EncounterIDList = {
     [2276] = 144796,            -- High Tinker Mekkatorque
     [2280] = 146251,            -- Stormwall Blockade
     [2281] = 146409,            -- Lady Jaina Proudmoore
-    
+
     -- Crucible of Storms
     [2269] = 146497,            -- Restless Cabal
     [2273] = 145371,            -- Uunat
-    
+
     -- Eternal Palace
     [2289] = 150653,            -- Blackwater Behemoth
     [2293] = 151586,            -- Za'qul, Harbinger of Ny'alotha
@@ -612,17 +612,17 @@ MRT_EncounterIDList = {
     [2304] = 152236,            -- Lady Ashvane
     [2311] = 152852,            -- The Queen's Court
     [2299] = 152910,            -- Queen Azshara
-    
+
 }
 
--- ARRAY 
+-- ARRAY
 -- :>
 MRT_ArrayBossIDList = {}
 MRT_ArrayBossIDList_cache = {}
 
 for key, val in pairs(MRT_BossIDList) do
 	MRT_ArrayBossIDList_cache[val] = MRT_ArrayBossIDList_cache[val] or { }
-	table.insert(MRT_ArrayBossIDList_cache[val], key) 
+	table.insert(MRT_ArrayBossIDList_cache[val], key)
 end
 
 for key, val in pairs(MRT_ArrayBossIDList_cache) do
@@ -643,7 +643,7 @@ MRT_BossSpellIDTriggerList = {
     -----------------
     -- Mizukichan - for debugging purposes
     --[139] = { "Mizukichan - Renew" , 1 },
-    
+
     -- Dragon Soul
     [110063] = { "Madness of Deathwing", 56173 },       -- ID of "Astral Recall", cast by Thrall when the fight is won
 
@@ -665,20 +665,20 @@ MRT_ReverseBossIDList = {
     ["Valithria Dreamwalker"] = 36789,
     -- Ruby Sanctum
     ["Halion"] = 39863,
-    
+
     ------------------------
     --  Mist of Pandaria  --
     ------------------------
     ["Tsulong"] = 62442,
     ["Lei Shi"] = 62983,
-    
+
     ["Wind Lord Mel'jarak"] = 62397,
     ["Amber-Shaper Un'sok"] = 62511,
     ["Grand Empress Shek'zeer"] = 62837,
-	
+
 	["Immerseus"] = 71543,
 	["Spoils of Pandaria"] = 71889,		-- ID of ... something
-    
+
 }
 
 
@@ -692,7 +692,7 @@ MRT_IgnoredItemIDList = {
     [45624] = true,     -- ...Conquest
     [47241] = true,     -- ...Triumph
     [49426] = true,     -- ...Frost
-    
+
     -- Gems
     [36931] = true,     -- Ametrine
     [36919] = true,     -- Cardinal Ruby
@@ -700,7 +700,7 @@ MRT_IgnoredItemIDList = {
     [36934] = true,     -- Eye of Zul
     [36922] = true,     -- King's Amber
     [36925] = true,     -- Majestic Zircon
-    
+
     -- Shards
     [20725] = true,     -- Nexus Crystal
     [22450] = true,     -- Void Crystal
@@ -711,33 +711,33 @@ MRT_IgnoredItemIDList = {
     [111245] = true,    -- Luminous Shard
     [115504] = true,    -- Fractured Temporal Crystal
     [113588] = true,    -- Temporal Crystal
-    
+
     -- Sigils of...
     [87208] = true,     -- Sigil of Power
     [87209] = true,     -- Sigil of Wisdom
-    
+
     -- Wrathion Legendary Questline
     [87210] = true,     -- Chimera of Fear
     [94593] = true,     -- Secrets of the Empire
     [94594] = true,     -- Titan Runestones
     [94867] = true,     -- Heart of the Thunder King
-    
+
     -- WoD Legendary Questline
     [115280] = true,    -- Abrogator Stone
     [115288] = true,    -- Felbreaker's Tome
     [115289] = true,    -- Sigil of the Sorcerer King
     [115494] = true,    -- Draenic Thaumaturgical Orb
     [127115] = true,    -- Tome of Chaos
-    
+
     -- WoD Garrison Follower Upgrades
     [114131] = true,    -- Power Overrun Weapon Enhancement
     [114822] = true,    -- Heavily Reinforced Armor Enhancement
     [114622] = true,    -- Goredrenched Weaponry
     [114746] = true,    -- Goredrenched Armor Set
-    
+
     -- Rogue stuff
     [113007] = true,    -- Magma-Infused War Beads
-    
+
     -- Legion Questitems
     [141303] = true,    -- Essence of Clarity (normal)
     [141304] = true,    -- Essence of Clarity (heroic)
@@ -754,11 +754,11 @@ MRT_IgnoredItemIDList = {
 	[152908] = true, 	-- Sigil of the Dark Titan (normal)
 	[152909] = true, 	-- Sigil of the Dark Titan (heroic)
 	[152910] = true, 	-- Sigil of the Dark Titan (mythic)
-    
+
     -- BfA Crafting
     [162461] = true,    -- Sanguicell
     [165703] = true,    -- Breath of Bwonsamdi
-    
+
 }
 
 
@@ -788,7 +788,7 @@ mrt.DBConvertMapToInstanceList = {
     [718] = 249,        -- Onyxia's Lair
     [604] = 631,        -- Icecrown Citadel
     [609] = 724,        -- The Ruby Sanctum
-    -- Cataclysm       
+    -- Cataclysm
     [752] = 757,        -- Baradin Hold
     [754] = 669,        -- Blackwing Descent
     [758] = 671,        -- The Bastion of Twilight

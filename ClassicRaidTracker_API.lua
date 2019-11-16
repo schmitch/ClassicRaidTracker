@@ -8,9 +8,9 @@
 --
 --    This file is part of Mizus RaidTracker.
 --
---    Mizus RaidTracker is free software: you can redistribute it and/or 
---    modify it under the terms of the GNU General Public License as 
---    published by the Free Software Foundation, either version 3 of the 
+--    Mizus RaidTracker is free software: you can redistribute it and/or
+--    modify it under the terms of the GNU General Public License as
+--    published by the Free Software Foundation, either version 3 of the
 --    License, or (at your option) any later version.
 --
 --    Mizus RaidTracker is distributed in the hope that it will be useful,
@@ -19,26 +19,23 @@
 --    GNU General Public License for more details.
 --
 --    You should have received a copy of the GNU General Public License
---    along with Mizus RaidTracker.  
+--    along with Mizus RaidTracker.
 --    If not, see <http://www.gnu.org/licenses/>.
-
-
 ----------------------------
 --  Global API variables  --
 ----------------------------
 -- Item actions
-MRT_LOOTACTION_NORMAL = 1;
-MRT_LOOTACTION_BANK = 2;
-MRT_LOOTACTION_DISENCHANT = 3;
-MRT_LOOTACTION_DELETE = 4;
+MRT_LOOTACTION_NORMAL = 1
+MRT_LOOTACTION_BANK = 2
+MRT_LOOTACTION_DISENCHANT = 3
+MRT_LOOTACTION_DELETE = 4
 
 -- Item notify sources
-MRT_NOTIFYSOURCE_ADD_POPUP = 1;
-MRT_NOTIFYSOURCE_ADD_SILENT = 2;
-MRT_NOTIFYSOURCE_ADD_GUI = 3;
-MRT_NOTIFYSOURCE_EDIT_GUI = 4;
-MRT_NOTIFYSOURCE_DELETE_GUI = 5;
-
+MRT_NOTIFYSOURCE_ADD_POPUP = 1
+MRT_NOTIFYSOURCE_ADD_SILENT = 2
+MRT_NOTIFYSOURCE_ADD_GUI = 3
+MRT_NOTIFYSOURCE_EDIT_GUI = 4
+MRT_NOTIFYSOURCE_DELETE_GUI = 5
 
 -----------
 --  API  --
@@ -74,9 +71,8 @@ MRT_NOTIFYSOURCE_DELETE_GUI = 5;
 --     MRT_Print("ItemCostHandler registration was a success!");
 -- end
 function MRT_RegisterItemCostHandler(functionToCall, addonName)
-    return MRT_RegisterItemCostHandlerCore(functionToCall, addonName);
+    return MRT_RegisterItemCostHandlerCore(functionToCall, addonName)
 end
-
 
 --- Unregister a previously registered item cost handler
 -- @name MRT_UnregisterItemCostHandler
@@ -84,9 +80,8 @@ end
 -- @return boolean - indicates if the unregistration of the function was successful
 -- @usage unregistrationSuccess = MRT_UnregisterItemCostHandler(registeredFunction);
 function MRT_UnregisterItemCostHandler(registeredFunction)
-    return MRT_UnregisterItemCostHandlerCore(registeredFunction);
+    return MRT_UnregisterItemCostHandlerCore(registeredFunction)
 end
-
 
 --- API for notifying external functions about changes in the loot table. Multiple functions can be registered.
 -- @name MRT_RegisterLootNotify
@@ -109,21 +104,20 @@ end
 -- --                   otherwise nil
 -- @usage -- A simple information function, which displays item information, when an item was added using the main UI:
 -- function MRT_LootNotify(itemInfoTable, source, raidNum, itemNum, oldItemInfoTable)
---     if (source == MRT_NOTIFYSOURCE_ADD_GUI) then 
+--     if (source == MRT_NOTIFYSOURCE_ADD_GUI) then
 --         MRT_Print("LootNotify! Item is "..itemInfoTable["ItemLink"].." - Source is "..tostring(source).." - raidNum/itemnum: "..tostring(raidNum).."/"..tostring(itemNum));
 --     end
 -- end
--- 
+--
 -- local registrationSuccess = MRT_RegisterLootNotify(MRT_LootNotify);
 -- if (registrationSuccess) then
 --     MRT_Print("LootNotify registration was a success!");
 -- end
 function MRT_RegisterLootNotify(functionToCall)
-    local registerStatusCore = MRT_RegisterLootNotifyCore(functionToCall);
-    local registerStatusGUI = MRT_RegisterLootNotifyGUI(functionToCall);
-    return (registerStatusCore or registerStatusGUI);
+    local registerStatusCore = MRT_RegisterLootNotifyCore(functionToCall)
+    local registerStatusGUI = MRT_RegisterLootNotifyGUI(functionToCall)
+    return (registerStatusCore or registerStatusGUI)
 end
-
 
 --- Unregister a previously registered loot notify function
 -- @name MRT_UnregisterLootNotify
@@ -131,12 +125,11 @@ end
 -- @return boolean - indicates if the unregistration of the function was successful
 -- @usage unregistrationSuccess = MRT_UnregisterLootNotify(registeredFunction);
 function MRT_UnregisterLootNotify(registeredFunction)
-    local unregisterStatusCore = MRT_UnregisterLootNotifyCore(registeredFunction);
-    local unregisterStatusGUI = MRT_UnregisterLootNotifyGUI(registeredFunction);
-    return (unregisterStatusCore or unregisterStatusGUI);
+    local unregisterStatusCore =
+        MRT_UnregisterLootNotifyCore(registeredFunction)
+    local unregisterStatusGUI = MRT_UnregisterLootNotifyGUI(registeredFunction)
+    return (unregisterStatusCore or unregisterStatusGUI)
 end
-
-
 
 --[[
 -- examples:
