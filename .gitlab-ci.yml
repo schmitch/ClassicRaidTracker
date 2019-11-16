@@ -17,4 +17,4 @@ deploy:
     - apk --no-cache add bash curl zip jq
     - curl -s https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh | bash -s -- -g 1.13.2
   only:
-  - tag
+  - tags
