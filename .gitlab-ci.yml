@@ -1,0 +1,20 @@
+image: martijnrondeel/luarocks
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    - luarocks install --local luacheck
+    - /root/.luarocks/bin/luacheck . --no-color -q
+
+deploy:
+  stage: deploy
+  script:
+    - echo $CF_API_KEY
+    - apk --no-cache add bash curl zip jq
+    - curl -s https://raw.githubusercontent.com/BigWigsMods/packager/master/release.sh | bash -s -- -g 1.13.2
+  only:
+  - tag

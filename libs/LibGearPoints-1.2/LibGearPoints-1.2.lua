@@ -28,7 +28,7 @@ local function BonusIDs(item)
 
   local itemString = string.match(itemLink, "item[%-?%d:]+")
   if not itemString then return nil end
-  
+
   local bonuses = {}
     local tbl = { strsplit(":", itemString) }
     for key, value in pairs(tbl) do
@@ -555,7 +555,7 @@ local CUSTOM_ITEM_DATA = {
   [120279] = { 4, 665, "INVTYPE_HEAD", true },
   [119316] = { 4, 665, "INVTYPE_HEAD", true },
   [120278] = { 4, 665, "INVTYPE_HEAD", true },
-  
+
   -- T18
   [127957] = { 4, 695, "INVTYPE_SHOULDER", true },
   [127967] = { 4, 695, "INVTYPE_SHOULDER", true },
@@ -606,7 +606,7 @@ local CUSTOM_ITEM_DATA = {
   [143577] = { 4, 875, "INVTYPE_CLOAK", true },
   [143578] = { 4, 875, "INVTYPE_CLOAK", true },
   [143579] = { 4, 875, "INVTYPE_CLOAK", true },
-  
+
   -- T20 tokens
   [147329] = { 4, 900, "INVTYPE_SHOULDER", true }, -- Conq
   [147328] = { 4, 900, "INVTYPE_SHOULDER", true }, -- Vanq
@@ -630,7 +630,7 @@ local CUSTOM_ITEM_DATA = {
 
   [147332] = { 4, 900, "INVTYPE_CLOAK", true },
   [147331] = { 4, 900, "INVTYPE_CLOAK", true },
-  [147333] = { 4, 900, "INVTYPE_CLOAK", true },  
+  [147333] = { 4, 900, "INVTYPE_CLOAK", true },
 }
 
 -- Used to add extra GP if the item contains bonus stats
@@ -663,7 +663,7 @@ local recent_items_map = {}
 
 local relicSubClass
 local function GetRelicSubClassString()
-	if not relicSubClass then		-- If not cached obtain 
+	if not relicSubClass then		-- If not cached obtain
 		local _, itemLink, rarity, level, _, itemClass, itemSubClass, _, equipLoc = GetItemInfo(140819)		-- ID of some relic
 		relicSubClass = itemSubClass
 	end
@@ -759,7 +759,7 @@ function lib:GetValue(item)
   if not rarity or rarity < quality_threshold then
     return nil, nil, level, rarity, equipLoc
   end
-  
+
   -- Check if it is a Relic
   if equipLoc == "" and itemSubClass == GetRelicSubClassString() then
     equipLoc = "INVTYPE_RELIC"

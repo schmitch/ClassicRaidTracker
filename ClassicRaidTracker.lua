@@ -13,9 +13,9 @@
 --
 --    This file is part of Mizus RaidTracker.
 --
---    Mizus RaidTracker is free software: you can redistribute it and/or 
---    modify it under the terms of the GNU General Public License as 
---    published by the Free Software Foundation, either version 3 of the 
+--    Mizus RaidTracker is free software: you can redistribute it and/or
+--    modify it under the terms of the GNU General Public License as
+--    published by the Free Software Foundation, either version 3 of the
 --    License, or (at your option) any later version.
 --
 --    Mizus RaidTracker is distributed in the hope that it will be useful,
@@ -24,24 +24,19 @@
 --    GNU General Public License for more details.
 --
 --    You should have received a copy of the GNU General Public License
---    along with Mizus RaidTracker.  
+--    along with Mizus RaidTracker.
 --    If not, see <http://www.gnu.org/licenses/>.
 
 
 -- Check for addon table
 if (not ClassicRaidTracker) then ClassicRaidTracker = {}; end
-local mrt = ClassicRaidTracker
 local _L = ClassicRaidTracker._L
-local _O = MRT_Options
 
 -------------------------------
 --  Globals/Default Options  --
 -------------------------------
 MRT_ADDON_TITLE = GetAddOnMetadata("ClassicRaidTracker", "Title");
 MRT_ADDON_VERSION = GetAddOnMetadata("ClassicRaidTracker", "Version");
---[===[@debug@
-MRT_ADDON_VERSION = "v0.82.2"
---@end-debug@]===]
 MRT_NumOfCurrentRaid = nil;
 MRT_NumOfLastBoss = nil;
 MRT_Options = {};
@@ -61,7 +56,7 @@ local MRT_Defaults = {
         ["General_PrunnRaidLog"] = false,                                           -- Prunning - shall old be deleted after a certain amount of time
         ["General_PrunningTime"] = 90,                                              -- Prunning time, after log shall be deleted (days)
         ["General_ShowMinimapIcon"] = false,                                        --
-        ["Attendance_GuildAttendanceCheckEnabled"] = false,                         -- 
+        ["Attendance_GuildAttendanceCheckEnabled"] = false,                         --
         ["Attendance_GuildAttendanceCheckNoAuto"] = true,                           --
         ["Attendance_GuildAttendanceCheckUseTrigger"] = false,
         ["Attendance_GuildAttendanceCheckTrigger"] = "!triggerexample",
@@ -84,7 +79,7 @@ local MRT_Defaults = {
         ["Tracking_LogMoPRaids"] = false,                                           -- Track MoP raid: true / nil
         ["Tracking_LogWarlordsRaids"] = false,                                      -- Track Warlords of Draenor raid: true / nil
         ["Tracking_LogLootModePersonal"] = true,
-        ["Tracking_AskForDKPValue"] = true,                                         -- 
+        ["Tracking_AskForDKPValue"] = true,                                         --
         ["Tracking_AskForDKPValuePersonal"] = true,                                 -- ask for points cost when in personal loot mode true/nil - not used when generic option is off
         ["Tracking_MinItemQualityToLog"] = 4,                                       -- 0:poor, 1:common, 2:uncommon, 3:rare, 4:epic, 5:legendary, 6:artifact
         ["Tracking_MinItemQualityToGetDKPValue"] = 4,                               -- 0:poor, 1:common, 2:uncommon, 3:rare, 4:epic, 5:legendary, 6:artifact
@@ -130,7 +125,7 @@ local ipairs = ipairs;
 local MRT_TimerFrame = CreateFrame("Frame");                -- Timer for Guild-Attendance-Checks
 local MRT_LoginTimer = CreateFrame("Frame");                -- Timer for Login (Wait 10 secs after Login - then check Raidstatus)
 local MRT_RaidRosterScanTimer = CreateFrame("Frame");       -- Timer for regular scanning for the raid roster (there is no event for disconnecting players)
-local MRT_RIWTimer = CreateFrame("Frame"); 
+local MRT_RIWTimer = CreateFrame("Frame");
 
 local MRT_GuildRoster = {};
 local MRT_GuildRosterInitialUpdateDone = nil;
@@ -197,12 +192,12 @@ function MRT_OnEvent(frame, event, ...)
             frame:UnregisterEvent("ADDON_LOADED");
             MRT_Initialize(frame);
         end
-    
-    elseif (event == "CHAT_MSG_LOOT") then 
+
+    elseif (event == "CHAT_MSG_LOOT") then
         if (MRT_NumOfCurrentRaid) then
             MRT_AutoAddLoot(...);
         end
-        
+
     elseif (event == "CHAT_MSG_WHISPER") then
         if (not MRT_TimerFrame.GARunning) then return false; end
         local msg, from = ...;
@@ -213,7 +208,7 @@ function MRT_OnEvent(frame, event, ...)
             if (not player) then return; end
             MRT_GuildAttendanceWhisper(player, from);
         end
-    
+
     elseif (event == "CHAT_MSG_MONSTER_YELL") then
         if (not MRT_Options["General_MasterEnable"]) then return end;
         if (not MRT_NumOfCurrentRaid) then return; end
@@ -228,27 +223,27 @@ function MRT_OnEvent(frame, event, ...)
             local NPCID = MRT_ReverseBossIDList[MRT_L.Bossyells[areaID][monsteryell]];
             MRT_AddBosskill(bossName, nil, NPCID);
         end
-    
-    elseif (event == "COMBAT_LOG_EVENT_UNFILTERED") then 
+
+    elseif (event == "COMBAT_LOG_EVENT_UNFILTERED") then
         if (not MRT_Options["General_MasterEnable"]) then return end;
         MRT_CombatLogHandler(...);
-        
+
     elseif (event == "ENCOUNTER_END") then
         local encounterID, name, difficulty, size, success = ...
         MRT_Debug("ENCOUNTER_END fired! encounterID="..encounterID..", name="..name..", difficulty="..difficulty..", size="..size..", success="..success)
         if (not MRT_Options["General_MasterEnable"]) then return end;
         MRT_EncounterEndHandler(encounterID, name, difficulty, size, success);
-    
-    elseif (event == "GUILD_ROSTER_UPDATE") then 
+
+    elseif (event == "GUILD_ROSTER_UPDATE") then
         MRT_GuildRosterUpdate(frame, event, ...);
-		
+
     elseif (event == "PARTY_INVITE_REQUEST") then
         MRT_Debug("PARTY_INVITE_REQUEST fired!");
         if (MRT_UnknownRelogStatus) then
             MRT_UnknownRelogStatus = false;
-            MRT_EndActiveRaid();            
+            MRT_EndActiveRaid();
         end
-        
+
     elseif (event == "PLAYER_ENTERING_WORLD") then
         frame:UnregisterEvent("PLAYER_ENTERING_WORLD");
         MRT_LoginTimer.loginTime = time();
@@ -268,15 +263,15 @@ function MRT_OnEvent(frame, event, ...)
                 MRT_UnknownRelogStatus = false;
             end
         end);
-        
+
     elseif (event == "PARTY_LOOT_METHOD_CHANGED") then
         MRT_Debug("Event PARTY_LOOT_METHOD_CHANGED fired.");
-        if (not MRT_Options["General_MasterEnable"]) then 
+        if (not MRT_Options["General_MasterEnable"]) then
             MRT_Debug("MRT seems to be disabled. Ignoring Event.");
-            return; 
+            return;
         end;
         MRT_CheckZoneAndSizeStatus();
-        
+
     elseif (event == "RAID_ROSTER_UPDATE") then
         MRT_Debug("RAID_ROSTER_UPDATE fired!");
         if (MRT_UnknownRelogStatus) then
@@ -284,12 +279,12 @@ function MRT_OnEvent(frame, event, ...)
             MRT_CheckRaidStatusAfterLogin();
         end
         MRT_RaidRosterUpdate(frame);
-		
+
     elseif (event == "ZONE_CHANGED_NEW_AREA") then
         MRT_Debug("Event ZONE_CHANGED_NEW_AREA fired.");
-        if (not MRT_Options["General_MasterEnable"]) then 
+        if (not MRT_Options["General_MasterEnable"]) then
             MRT_Debug("MRT seems to be disabled. Ignoring Event.");
-            return; 
+            return;
         end;
         -- The WoW-Client randomly returns wrong zone information directly after a zone change for a relatively long period of time.
         -- Use the DBM approach: wait 10 seconds after RIW-Event and then check instanceInfo stuff. Hopefully this fixes the problem....
@@ -302,11 +297,11 @@ function MRT_OnEvent(frame, event, ...)
                 MRT_CheckZoneAndSizeStatus();
             end
         end);
-    
-    elseif(event == "PLAYER_REGEN_DISABLED") then 
+
+    elseif(event == "PLAYER_REGEN_DISABLED") then
         wipe(MRT_ArrayBossID)
         --MRT_Debug("Tabelle gelöscht");
-    
+
     end
 end
 
@@ -345,7 +340,7 @@ function MRT_CombatLogHandler(...)
                         MRT_AddBosskill(localBossName, nil, NPCID);
                     end
                 end
-            else 
+            else
                 MRT_AddBosskill(localBossName, nil, NPCID);
             end
         end
@@ -373,7 +368,7 @@ end
 
 -- Slashcommand handler
 function MRT_SlashCmdHandler(msg)
-    msg_lower = string.lower(msg);
+    local msg_lower = string.lower(msg);
     if (msg_lower == 'options' or msg_lower == 'o') then
         InterfaceOptionsFrame_OpenToCategory("Classic RaidTracker");
         return;
@@ -399,7 +394,7 @@ function MRT_SlashCmdHandler(msg)
         return;
     elseif (string.match(msg, 'additem')) then
         local itemLink, looter, cost = string.match(msg, 'additem%s+(|c.+|r)%s+(%a+)%s+(%d*)');
-        if (not itemLink) then 
+        if (not itemLink) then
             itemLink, looter = string.match(msg, 'additem%s+(|c.+|r)%s+(%a+)');
             cost = 0;
         end
@@ -586,7 +581,7 @@ function MRT_UpdateSavedOptions()
         MRT_Options["ItemTracking_IgnoreEnchantingMats"] = true;
         MRT_Options["ItemTracking_IgnoreGems"] = true;
         MRT_Options["General_OptionsVersion"] = 11;
-    end 
+    end
     if MRT_Options["General_OptionsVersion"] == 11 then
         MRT_Options["Tracking_LogWotLKRaids"] = false;
         MRT_Options["General_OptionsVersion"] = 12;
@@ -600,8 +595,8 @@ function MRT_UpdateSavedOptions()
         MRT_Options["General_OptionsVersion"] = 14;
     end
     if MRT_Options["General_OptionsVersion"] == 14 then
-        MRT_Options["Tracking_LogCataclysmRaids"] = false;     
-        MRT_Options["Tracking_LogMoPRaids"] = true;            
+        MRT_Options["Tracking_LogCataclysmRaids"] = false;
+        MRT_Options["Tracking_LogMoPRaids"] = true;
         MRT_Options["Tracking_LogLootModePersonal"] = true;
         MRT_Options["General_OptionsVersion"] = 15;
     end
@@ -649,7 +644,7 @@ function MRT_VersionUpdate()
                 end
                 for j, playerInfo in pairs(raidInfoTable["Players"]) do
                     local name = playerInfo["Name"];
-                    if (MRT_PlayerDB[realm][name] == nil) then 
+                    if (MRT_PlayerDB[realm][name] == nil) then
                         MRT_PlayerDB[realm][name] = {};
                         MRT_PlayerDB[realm][name]["Name"] = name;
                     end
@@ -697,7 +692,7 @@ function MRT_VersionUpdate()
         end
         MRT_Options["DB_Version"] = 2;
     end
-    -- DB changes from v.2 to v.3: 
+    -- DB changes from v.2 to v.3:
     -- * Update from 3.4 difficulty IDs to 6.0 difficulty IDs
     -- * Add raid difficulty IDs to raid entries
     -- * Fix LFR (ID 17) entries
@@ -886,36 +881,6 @@ function MRT_CheckZoneAndSizeStatus()
     if (diffID == 6) then diffID = 4; end
     if (MRT_RaidZones[areaID]) then
         -- Check if the current raidZone is a zone which should be tracked
-        if (MRT_PvPRaids[areaID] and not MRT_Options["Tracking_LogAVRaids"]) then 
-            MRT_Debug("This instance is a PvP-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
-        if (MRT_LegacyRaidZonesWarlords[areaID] and not MRT_Options["Tracking_LogWarlordsRaids"]) then
-            MRT_Debug("This instance is a Draenor-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
-        if (MRT_LegacyRaidZonesPanadria[areaID] and not MRT_Options["Tracking_LogMoPRaids"]) then
-            MRT_Debug("This instance is a Pandaria-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
-        if (MRT_LegacyRaidZonesCataclysm[areaID] and not MRT_Options["Tracking_LogCataclysmRaids"]) then
-            MRT_Debug("This instance is a Cataclysm-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
-        if (MRT_LegacyRaidZonesWotLK[areaID] and not MRT_Options["Tracking_LogWotLKRaids"]) then
-            MRT_Debug("This instance is a WotLK-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
-        if (MRT_LegacyRaidZonesBC[areaID] and not MRT_Options["Tracking_LogBCRaids"]) then
-            MRT_Debug("This instance is a BC-Raid and tracking of those is disabled.");
-            if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
-            return;
-        end
         if (MRT_LegacyRaidZonesClassic[areaID] and not MRT_Options["Tracking_LogClassicRaids"]) then
             MRT_Debug("This instance is a Classic-Raid and tracking of those is disabled.");
             if (MRT_NumOfCurrentRaid) then MRT_EndActiveRaid(); end
@@ -1042,12 +1007,15 @@ function MRT_ResumeLastRaid()
     if (MRT_NumOfCurrentRaid) then return false; end
     -- if the player is not in a raid, then there is no reason to resume
     local numRaidMembers = MRT_GetNumRaidMembers();
+    local currentTime = MRT_GetCurrentTime();
+
     if (numRaidMembers == 0) then return false; end
     -- sanity checks: Is there a last raid? Was the last raid on the same realm as this raid?
     local numOfLastRaid = #MRT_RaidLog;
     if (not numOfLastRaid or numOfLastRaid == 0) then return false; end
     local realm = GetRealmName();
     if (MRT_RaidLog[numOfLastRaid]["Realm"] ~= realm) then return false; end
+    local raidSize = MRT_RaidLog[numOfLastRaid]["RaidSize"];
     -- scan RaidRoster and create a list with current valid attendees (valid in the sense should be tracked according to the current setting (check subgroup and onlinestatus))
     -- also, update PlayerDB
     local currentAttendeesList = {};
@@ -1120,7 +1088,7 @@ end
 
 function MRT_RaidRosterUpdate(frame)
     if (not MRT_NumOfCurrentRaid) then return; end
-    if (not MRT_IsInRaid()) then 
+    if (not MRT_IsInRaid()) then
         MRT_EndActiveRaid();
         return;
     end
@@ -1179,8 +1147,8 @@ function MRT_RaidRosterUpdate(frame)
     for key, val in pairs(MRT_RaidLog[MRT_NumOfCurrentRaid]["Players"]) do
         local matchFound = nil;
         for index, activePlayer in ipairs (activePlayerList) do
-            if (val["Name"] == activePlayer) then 
-                matchFound = true; 
+            if (val["Name"] == activePlayer) then
+                matchFound = true;
             end
         end
         if (not matchFound) then
@@ -1270,11 +1238,11 @@ end
 function MRT_TakeSnapshot()
     if (MRT_NumOfCurrentRaid) then
         MRT_Print(MRT_L.Core["TakeSnapshot_CurrentRaidError"]);
-        return false; 
+        return false;
     end
     if (not MRT_IsInRaid()) then
         MRT_Print(MRT_L.Core["TakeSnapshot_NotInRaidError"]);
-        return false; 
+        return false;
     end
     MRT_CreateNewRaid("Snapshot", 40, 0);
     MRT_EndActiveRaid();
@@ -1308,14 +1276,14 @@ function MRT_AutoAddLoot(chatmsg)
         itemLink = deformat(chatmsg, LOOT_ITEM_SELF);
     end
     -- if itemLink == nil, then there was neither a LOOT_ITEM, nor a LOOT_ITEM_SELF message
-    if (itemLink == nil) then 
-        -- MRT_Debug("No valid loot event received."); 
-        return; 
+    if (itemLink == nil) then
+        -- MRT_Debug("No valid loot event received.");
+        return;
     end
 	-- if code reaches this point, we should have a valid looter and a valid itemLink
     MRT_Debug("Item looted - Looter is "..playerName.." and loot is "..itemLink);
 	MRT_AutoAddLootItem(playerName, itemLink, itemCount);
-end	
+end
 
 -- track loot for a given player and item
 function MRT_AutoAddLootItem(playerName, itemLink, itemCount)
@@ -1381,7 +1349,7 @@ function MRT_AutoAddLootItem(playerName, itemLink, itemCount)
         end
     end
     -- Quick&Dirty for trash drops before first boss kill
-    if (MRT_NumOfLastBoss == nil) then 
+    if (MRT_NumOfLastBoss == nil) then
         MRT_AddBosskill(MRT_L.Core["Trash Mob"], "N");
     end
     -- if code reach this point, we should have valid item information, an active raid and at least one boss kill entry - make a table!
@@ -1402,7 +1370,7 @@ function MRT_AutoAddLootItem(playerName, itemLink, itemCount)
     -- get current loot mode
     local isPersonal = select(1, GetLootMethod()) == "personalloot"
     -- check if we should ask the player for item cost
-    if (supressCostDialog or (not MRT_Options["Tracking_AskForDKPValue"]) or (isPersonal and not MRT_Options["Tracking_AskForDKPValuePersonal"])) then 
+    if (supressCostDialog or (not MRT_Options["Tracking_AskForDKPValue"]) or (isPersonal and not MRT_Options["Tracking_AskForDKPValuePersonal"])) then
         -- notify registered, external functions
         local itemNum = #MRT_RaidLog[MRT_NumOfCurrentRaid]["Loot"];
         if (#MRT_ExternalLootNotifier > 0) then
@@ -1423,7 +1391,7 @@ function MRT_AutoAddLootItem(playerName, itemLink, itemCount)
                 pcall(val, itemInfo, MRT_NOTIFYSOURCE_ADD_SILENT, MRT_NumOfCurrentRaid, itemNum);
             end
         end
-        return; 
+        return;
     end
     if (MRT_Options["Tracking_MinItemQualityToGetDKPValue"] > MRT_ItemColorValues[itemColor]) then return; end
     -- ask the player for item cost
@@ -1433,13 +1401,13 @@ end
 function MRT_ManualAddLoot(itemLink, looter, cost)
     if (not MRT_NumOfCurrentRaid) then
         MRT_Print(MRT_L["GUI"]["No active raid"]);
-        return; 
+        return;
     end
     if (not MRT_NumOfLastBoss) then MRT_AddBosskill(MRT_L.Core["Trash Mob"]); end
     local itemName, _, itemId, itemString, itemRarity, itemColor, itemLevel, _, itemType, itemSubType, _, _, _, _ = MRT_GetDetailedItemInformation(itemLink);
-    if (not itemName) then 
+    if (not itemName) then
         MRT_Debug("MRT_ManualAddLoot(): Failed horribly when trying to get item informations.");
-        return; 
+        return;
     end
     local lootInfo = {
         ["ItemLink"] = itemLink,
@@ -1480,7 +1448,7 @@ end
 ---------------------------
 --  loot cost functions  --
 ---------------------------
--- basic idea: add looted items to a little queue and ask cost for each item in the queue 
+-- basic idea: add looted items to a little queue and ask cost for each item in the queue
 --             this should avoid missing dialogs for fast looted items
 -- note: standard dkpvalue is already 0 (unless EPGP-system-support enabled)
 function MRT_DKPFrame_AddToItemCostQueue(raidnum, itemnum)
@@ -1499,7 +1467,7 @@ function MRT_DKPFrame_AskCost()
     -- if there are no entries in the queue, then return
     if (#MRT_AskCostQueue == 0) then
         MRT_AskCostQueueRunning = nil;
-        return; 
+        return;
     end
     -- else format text and show "Enter Cost" frame
     local raidNum = MRT_AskCostQueue[1]["RaidNum"];
@@ -1540,7 +1508,7 @@ function MRT_DKPFrame_AskCost()
         MRT_GetDKPValueFrame_EB:SetAutoFocus(true);
     end
     -- show DKPValue Frame
-    MRT_GetDKPValueFrame:Show();  
+    MRT_GetDKPValueFrame:Show();
 end
 
 -- Buttons: OK, Cancel, Delete, Bank, Disenchanted
@@ -1562,7 +1530,7 @@ function MRT_DKPFrame_Handler(button)
     end
     -- hide frame
     MRT_GetDKPValueFrame:Hide();
-    -- this line is solely for debug purposes 
+    -- this line is solely for debug purposes
     -- if (button == "Cancel") then return; end
     -- process item
     local raidNum = MRT_AskCostQueue[1]["RaidNum"];
@@ -1611,7 +1579,7 @@ function MRT_DKPFrame_Handler(button)
         -- queue finished, delete itemes which were marked as deleted - FIXME!
     else
         MRT_DKPFrame_AskCost();
-    end    
+    end
 end
 
 function MRT_GetDKPValueFrame_DropDownList_Toggle()
@@ -1666,8 +1634,8 @@ function MRT_StartGuildAttendanceCheck(bosskilled)
     -- Put decider here: Which textblock should be used for the attendance check?
     local unformattedAnnouncement = nil;
     local bossName = bosskilled;
-    if (bosskilled == "_attendancecheck_") then 
-        bossName = MRT_L.Core["GuildAttendanceBossEntry"];        
+    if (bosskilled == "_attendancecheck_") then
+        bossName = MRT_L.Core["GuildAttendanceBossEntry"];
     end
     if (MRT_Options["Attendance_GuildAttendanceUseCustomText"]) then
         unformattedAnnouncement = MRT_Options["Attendance_GuildAttendanceCustomText"];
@@ -1719,22 +1687,19 @@ end
 function MRT_GuildAttendanceSendAnnouncement(unformattedText, boss, timer)
     -- format text
     local announcement = unformattedText;
-    if (boss) then 
-        announcement = string.gsub(announcement, "<<BOSS>>", boss); 
+    if (boss) then
+        announcement = string.gsub(announcement, "<<BOSS>>", boss);
     end
-    if (timer) then 
-        announcement = string.gsub(announcement, "<<TIME>>", timer); 
+    if (timer) then
+        announcement = string.gsub(announcement, "<<TIME>>", timer);
     end
-    if (MRT_Options["Attendance_GuildAttendanceCheckTrigger"]) then 
-        announcement = string.gsub(announcement, "<<TRIGGER>>", MRT_Options["Attendance_GuildAttendanceCheckTrigger"]); 
+    if (MRT_Options["Attendance_GuildAttendanceCheckTrigger"]) then
+        announcement = string.gsub(announcement, "<<TRIGGER>>", MRT_Options["Attendance_GuildAttendanceCheckTrigger"]);
     end
     -- split announcement text block into multiple lines
-    local textlineList = { string.split("\n", announcement) };
+    local textlineList = { strsplit("\n", announcement) };
     -- send announcement
     local targetChannel = "GUILD";
-    --[===[@debug@
-    if (MRT_Options["General_DebugEnabled"]) then targetChannel = "RAID"; end
-    --@end-debug@]===]
     for index, textline in ipairs(textlineList) do
         SendChatMessage(textline, targetChannel);
     end
@@ -1875,7 +1840,7 @@ end
 function MRT_GetInstanceInfo()
     local name, instanceType, difficultyID, difficultyName, maxPlayers, dynamicDifficulty, isDynamic, instanceMapID, instanceGroupSize = GetInstanceInfo()
     -- handle non instanced territories as 40 player raids
-    if (difficultyID == 0) then 
+    if (difficultyID == 0) then
         difficultyID = 9;
         maxPlayers = 40;
     end

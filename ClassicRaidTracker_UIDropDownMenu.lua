@@ -22,7 +22,7 @@ MRT_LIB_OPEN_DROPDOWNMENUS = {}; --used by UnitPopup only
 
 local MRT_Lib_UIDropDownMenuDelegate = CreateFrame("FRAME");
 for i = 1, MRT_LIB_UIDROPDOWNMENU_MAXLEVELS do
-	local listFrameName = "MRT_Lib_DropDownList"..i;	
+	local listFrameName = "MRT_Lib_DropDownList"..i;
 	local f = CreateFrame("Button", listFrameName, nil, "MRT_Lib_UIDropDownListTemplate");
 	f:SetID(i);
 	f:SetSize(180, 10);
@@ -55,7 +55,7 @@ function MRT_Lib_UIDropDownMenu_InitializeHelper (frame)
 
 	-- Set the frame that's being intialized
 	MRT_Lib_UIDropDownMenuDelegate:SetAttribute("initmenu", frame);
-	
+
 	-- Hide all the buttons
 	local button, dropDownList;
 	for i = 1, MRT_LIB_UIDROPDOWNMENU_MAXLEVELS, 1 do
@@ -77,7 +77,7 @@ function MRT_Lib_UIDropDownMenu_Initialize(frame, initFunction, displayMode, lev
 	frame.menuList = menuList;
 
 	securecall("MRT_Lib_UIDropDownMenu_InitializeHelper", frame);
-	
+
 	-- Set the initialize function and call it.  The initFunction populates the dropdown list.
 	if ( initFunction ) then
 		frame.initialize = initFunction;
@@ -88,7 +88,7 @@ function MRT_Lib_UIDropDownMenu_Initialize(frame, initFunction, displayMode, lev
 	if(level == nil) then
 		level = 1;
 	end
-	
+
 	local dropDownList = _G["MRT_Lib_DropDownList"..level]
 	dropDownList.dropdown = frame;
 	dropDownList.shouldRefresh = true;
@@ -103,7 +103,7 @@ function MRT_Lib_UIDropDownMenu_Initialize(frame, initFunction, displayMode, lev
 		_G[name.."ButtonDisabledTexture"]:SetTexture("");
 		_G[name.."ButtonPushedTexture"]:SetTexture("");
 		_G[name.."ButtonHighlightTexture"]:SetTexture("");
-		
+
 		local button = _G[name.."Button"]
 		button:ClearAllPoints();
 		button:SetPoint("LEFT", name.."Text", "LEFT", -9, 0);
@@ -116,14 +116,14 @@ end
 function MRT_Lib_UIDropDownMenu_RefreshDropDownSize(self)
 	self.maxWidth = MRT_Lib_UIDropDownMenu_GetMaxButtonWidth(self);
 	self:SetWidth(self.maxWidth + 25);
-		
+
 	for i=1, MRT_LIB_UIDROPDOWNMENU_MAXBUTTONS, 1 do
 		local icon = _G[self:GetName().."Button"..i.."Icon"];
-		
+
 		if ( icon.tFitDropDownSizeX ) then
 			icon:SetWidth(self.maxWidth - 5);
 		end
-	end	
+	end
 end
 
 -- If dropdown is visible then see if its timer has expired, if so hide the frame
@@ -132,7 +132,7 @@ function MRT_Lib_UIDropDownMenu_OnUpdate(self, elapsed)
 		MRT_Lib_UIDropDownMenu_RefreshDropDownSize(self);
 		self.shouldRefresh = false;
 	end
-	
+
 	if ( not self.showTimer or not self.isCounting ) then
 		return;
 	elseif ( self.showTimer < 0 ) then
@@ -212,7 +212,7 @@ local wipe = table.wipe;
 
 function MRT_Lib_UIDropDownMenu_CreateInfo()
 	-- Reuse the same table to prevent memory churn
-	
+
 	if ( issecure() ) then
 		securecall(wipe, MRT_Lib_UIDropDownMenu_SecureInfo);
 		return MRT_Lib_UIDropDownMenu_SecureInfo;
@@ -249,7 +249,7 @@ end
 
 function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	--[[
-	Might to uncomment this if there are performance issues 
+	Might to uncomment this if there are performance issues
 	if ( not MRT_LIB_UIDROPDOWNMENU_OPEN_MENU ) then
 		return;
 	end
@@ -257,7 +257,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	if ( not level ) then
 		level = 1;
 	end
-	
+
 	local listFrame = _G["MRT_Lib_DropDownList"..level];
 	local index = listFrame and (listFrame.numButtons + 1) or 1;
 	local width;
@@ -265,25 +265,25 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	MRT_Lib_UIDropDownMenuDelegate:SetAttribute("createframes-level", level);
 	MRT_Lib_UIDropDownMenuDelegate:SetAttribute("createframes-index", index);
 	MRT_Lib_UIDropDownMenuDelegate:SetAttribute("createframes", true);
-	
+
 	listFrame = listFrame or _G["MRT_Lib_DropDownList"..level];
 	local listFrameName = listFrame:GetName();
-	
+
 	-- Set the number of buttons in the listframe
 	listFrame.numButtons = index;
-	
+
 	local button = _G[listFrameName.."Button"..index];
 	local normalText = _G[button:GetName().."NormalText"];
 	local icon = _G[button:GetName().."Icon"];
 	-- This button is used to capture the mouse OnEnter/OnLeave events if the dropdown button is disabled, since a disabled button doesn't receive any events
 	-- This is used specifically for drop down menu time outs
 	local invisibleButton = _G[button:GetName().."InvisibleButton"];
-	
+
 	-- Default settings
 	button:SetDisabledFontObject(GameFontDisableSmallLeft);
 	invisibleButton:Hide();
 	button:Enable();
-	
+
 	-- If not clickable then disable the button and set it white
 	if ( info.notClickable ) then
 		info.disabled = true;
@@ -295,14 +295,14 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 		info.disabled = true;
 		button:SetDisabledFontObject(GameFontNormalSmallLeft);
 	end
-	
+
 	-- Disable the button if disabled and turn off the color code
 	if ( info.disabled ) then
 		button:Disable();
 		invisibleButton:Show();
 		info.colorCode = nil;
 	end
-	
+
 	-- If there is a color for a disabled line, set it
 	if( info.disablecolor ) then
 		info.colorCode = info.disablecolor;
@@ -316,7 +316,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 		else
 			button:SetText(info.text);
 		end
-		
+
 		-- Set icon
 		if ( info.icon ) then
 			icon:SetSize(16,16);
@@ -346,11 +346,11 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 		button:SetText("");
 		icon:Hide();
 	end
-	
+
 	button.iconOnly = nil;
 	button.icon = nil;
 	button.iconInfo = nil;
-	
+
 	if (info.iconInfo) then
 		icon.tFitDropDownSizeX = info.iconInfo.tFitDropDownSizeX;
 	else
@@ -387,7 +387,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	button.tooltipOnButton = info.tooltipOnButton;
 	button.noClickSound = info.noClickSound;
 	button.padding = info.padding;
-	
+
 	if ( info.value ) then
 		button.value = info.value;
 	elseif ( info.text ) then
@@ -395,7 +395,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	else
 		button.value = nil;
 	end
-	
+
 	-- Show the expand arrow if it has one
 	if ( info.hasArrow ) then
 		_G[listFrameName.."Button"..index.."ExpandArrow"]:Show();
@@ -403,7 +403,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 		_G[listFrameName.."Button"..index.."ExpandArrow"]:Hide();
 	end
 	button.hasArrow = info.hasArrow;
-	
+
 	-- If not checkable move everything over to the left to fill in the gap where the check would be
 	local xPos = 5;
 	local yPos = -((button:GetID() - 1) * MRT_LIB_UIDROPDOWNMENU_BUTTON_HEIGHT) - MRT_LIB_UIDROPDOWNMENU_BORDER_HEIGHT;
@@ -411,7 +411,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	if (info.iconOnly) then
 		displayInfo = icon;
 	end
-	
+
 	displayInfo:ClearAllPoints();
 	if ( info.notCheckable ) then
 		if ( info.justifyH and info.justifyH == "CENTER" ) then
@@ -420,7 +420,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 			displayInfo:SetPoint("LEFT", button, "LEFT", 0, 0);
 		end
 		xPos = xPos + 10;
-		
+
 	else
 		xPos = xPos + 12;
 		displayInfo:SetPoint("LEFT", button, "LEFT", 20, 0);
@@ -433,7 +433,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 			xPos = xPos - 6;
 		end
 	end
-	
+
 	-- If no open frame then set the frame to the currently initialized frame
 	frame = frame or MRT_LIB_UIDROPDOWNMENU_INIT_MENU;
 
@@ -460,7 +460,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	end
 
 
-	if not info.notCheckable then 
+	if not info.notCheckable then
 		if ( info.disabled ) then
 			_G[listFrameName.."Button"..index.."Check"]:SetDesaturated(true);
 			_G[listFrameName.."Button"..index.."Check"]:SetAlpha(0.5);
@@ -480,7 +480,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 			_G[listFrameName.."Button"..index.."Check"]:SetTexCoord(0.0, 0.5, 0.5, 1.0);
 			_G[listFrameName.."Button"..index.."UnCheck"]:SetTexCoord(0.5, 1.0, 0.5, 1.0);
 		end
-		
+
 		-- Checked can be a function now
 		local checked = info.checked;
 		if ( type(checked) == "function" ) then
@@ -500,7 +500,7 @@ function MRT_Lib_UIDropDownMenu_AddButton(info, level)
 	else
 		_G[listFrameName.."Button"..index.."Check"]:Hide();
 		_G[listFrameName.."Button"..index.."UnCheck"]:Hide();
-	end	
+	end
 	button.checked = info.checked;
 
 	-- If has a colorswatch, show it and vertex color it
@@ -546,12 +546,12 @@ function MRT_Lib_UIDropDownMenu_GetButtonWidth(button)
 	local buttonName = button:GetName();
 	local icon = _G[buttonName.."Icon"];
 	local normalText = _G[buttonName.."NormalText"];
-	
+
 	if ( button.iconOnly and icon ) then
 		width = icon:GetWidth();
 	elseif ( normalText and normalText:GetText() ) then
 		width = normalText:GetWidth() + 40;
-		
+
 		if ( button.icon ) then
 			-- Add padding for the icon
 			width = width + 10;
@@ -559,7 +559,7 @@ function MRT_Lib_UIDropDownMenu_GetButtonWidth(button)
 	else
 		return 0;
 	end
-	
+
 	-- Add padding if has and expand arrow or color swatch
 	if ( button.hasArrow or button.hasColorSwatch ) then
 		width = width + 10;
@@ -570,14 +570,14 @@ function MRT_Lib_UIDropDownMenu_GetButtonWidth(button)
 	if ( button.padding ) then
 		width = width + button.padding;
 	end
-	
+
 	return width;
 end
 
 function MRT_Lib_UIDropDownMenu_Refresh(frame, useValue, dropdownLevel)
 	local button, checked, checkImage, uncheckImage, normalText, width;
 	local maxWidth = 0;
-	local somethingChecked = nil; 
+	local somethingChecked = nil;
 	if ( not dropdownLevel ) then
 		dropdownLevel = MRT_LIB_UIDROPDOWNMENU_MENU_LEVEL;
 	end
@@ -609,7 +609,7 @@ function MRT_Lib_UIDropDownMenu_Refresh(frame, useValue, dropdownLevel)
 			checked = button.checked(button);
 		end
 
-		if not button.notCheckable and button:IsShown() then	
+		if not button.notCheckable and button:IsShown() then
 			-- If checked show check image
 			checkImage = _G["MRT_Lib_DropDownList"..dropdownLevel.."Button"..i.."Check"];
 			uncheckImage = _G["MRT_Lib_DropDownList"..dropdownLevel.."Button"..i.."UnCheck"];
@@ -742,7 +742,7 @@ function MRT_Lib_UIDropDownMenuButton_OnClick(self)
 	if ( type (checked) == "function" ) then
 		checked = checked(self);
 	end
-	
+
 
 	if ( self.keepShownOnClick ) then
 		if not self.notCheckable then
@@ -760,7 +760,7 @@ function MRT_Lib_UIDropDownMenuButton_OnClick(self)
 		self:GetParent():Hide();
 	end
 
-	if ( type (self.checked) ~= "function" ) then 
+	if ( type (self.checked) ~= "function" ) then
 		self.checked = checked;
 	end
 
@@ -820,16 +820,16 @@ function MRT_Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOf
 			uiScale = uiParentScale;
 		end
 		listFrame:SetScale(uiScale);
-		
-		-- Hide the listframe anyways since it is redrawn OnShow() 
+
+		-- Hide the listframe anyways since it is redrawn OnShow()
 		listFrame:Hide();
-		
+
 		-- Frame to anchor the dropdown menu to
 		local anchorFrame;
 
 		-- Display stuff
 		-- Level specific stuff
-		if ( level == 1 ) then	
+		if ( level == 1 ) then
 			MRT_Lib_UIDropDownMenuDelegate:SetAttribute("openmenu", dropDownFrame);
 			listFrame:ClearAllPoints();
 			-- If there's no specified anchorName then use left side of the dropdown menu
@@ -912,7 +912,7 @@ function MRT_Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOf
 			relativePoint = "TOPRIGHT";
 			listFrame:SetPoint(point, anchorFrame, relativePoint, 0, 0);
 		end
-		
+
 		-- Change list box appearance depending on display mode
 		if ( dropDownFrame and dropDownFrame.displayMode == "MENU" ) then
 			_G[listFrameName.."Backdrop"]:Hide();
@@ -939,28 +939,28 @@ function MRT_Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOf
 		end
 
 		listFrame.onHide = dropDownFrame.onHide;
-		
-		
+
+
 		--  We just move level 1 enough to keep it on the screen. We don't necessarily change the anchors.
 		if ( level == 1 ) then
 			local offLeft = listFrame:GetLeft()/uiScale;
 			local offRight = (GetScreenWidth() - listFrame:GetRight())/uiScale;
 			local offTop = (GetScreenHeight() - listFrame:GetTop())/uiScale;
 			local offBottom = listFrame:GetBottom()/uiScale;
-			
+
 			local xAddOffset, yAddOffset = 0, 0;
 			if ( offLeft < 0 ) then
 				xAddOffset = -offLeft;
 			elseif ( offRight < 0 ) then
 				xAddOffset = offRight;
 			end
-			
+
 			if ( offTop < 0 ) then
 				yAddOffset = offTop;
 			elseif ( offBottom < 0 ) then
 				yAddOffset = -offBottom;
 			end
-			
+
 			listFrame:ClearAllPoints();
 			if ( anchorName == "cursor" ) then
 				listFrame:SetPoint(point, relativeTo, relativePoint, xOffset + xAddOffset, yOffset + yAddOffset);
@@ -974,7 +974,7 @@ function MRT_Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOf
 				offscreenY = 1;
 			end
 			if ( listFrame:GetRight() > GetScreenWidth() ) then
-				offscreenX = 1;	
+				offscreenX = 1;
 			end
 			if ( offscreenY and offscreenX ) then
 				point = gsub(point, "TOP(.*)", "BOTTOM%1");
@@ -997,7 +997,7 @@ function MRT_Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOf
 				xOffset = 0;
 				yOffset = 14;
 			end
-			
+
 			listFrame:ClearAllPoints();
 			listFrame.parentLevel = tonumber(strmatch(anchorFrame:GetName(), "MRT_Lib_DropDownList(%d+)"));
 			listFrame.parentID = anchorFrame:GetID();
@@ -1050,7 +1050,7 @@ function MRT_Lib_UIDropDownMenu_SetButtonWidth(frame, width)
 	if ( width == "TEXT" ) then
 		width = _G[frame:GetName().."Text"]:GetWidth();
 	end
-	
+
 	_G[frame:GetName().."Button"]:SetWidth(width);
 	frame.noResize = 1;
 end
