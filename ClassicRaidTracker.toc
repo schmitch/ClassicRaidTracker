@@ -1,4 +1,4 @@
-﻿## Interface: 11302
+﻿## Interface: 11303
 ## Title: ClassicRaidTracker
 ## Version: @project-version@
 ## Notes: Tracks raid, loot and attendance
@@ -6,9 +6,9 @@
 ## LoadOnDemand: 0
 ## DefaultState: enabled
 ## SavedVariables: MRT_Options, MRT_RaidLog, MRT_PlayerDB, MRT_NumOfCurrentRaid, MRT_NumOfLastBoss
-## X-Max-Interface: 11302
+## X-Max-Interface: 11303
 ## X-Min-Interface: 11302
-## X-Curse-Project-ID: 344365
+## X-Curse-Project-ID: 362524
 
 embeds.xml
 localization.lua
